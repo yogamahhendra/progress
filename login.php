@@ -43,6 +43,9 @@ if (isset($_POST["submit"])){
     <div class="container">
       <div class="warna">
         <h4 class="text-center"><strong>Login ke akun anda</strong></h4>
+        <?php if (isset($error)) : ?>
+          <p style="color:red; font-style:italic";>Email/Password Salah!</p>
+        <?php endif; ?>
         <form action=" " method="post">
         <hr>
             <div class="form-group">
