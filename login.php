@@ -1,0 +1,75 @@
+<?php
+
+require 'koneksi.php';
+if (isset($_POST["submit"])){
+
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+
+  $cek = mysqli_query($koneksi, "SELECT * FROM user WHERE email = '$email'");
+
+  //cek username
+  if (mysqli_num_rows($cek ) === 1){
+    $row = mysqli_fetch_assoc($cek);
+    //cek password
+    if ($password == $row["password"]) {
+
+      $_SESSION['login'] = true;
+      $_SESSION["email"] = $row["email"];
+      $_SESSION["nama"] = $row["nama"];
+      header("Location: index.php");
+    }
+  }
+  $error = true;
+}
+
+?>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/login.css">
+    <link rel="stylesheet" type="text/css" href="assets/fontawesome/css/all.min.css">
+
+    <title>Login - Loketku</title>
+  </head>
+  <body>
+  <?php include 'layout/navbar.php';?>
+    <div class="container">
+      <div class="warna">
+        <h4 class="text-center"><strong>Login ke akun anda</strong></h4>
+        <form action=" " method="post">
+        <hr>
+            <div class="form-group">
+              <label>Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-envelope"></i></div>
+                </div>
+                <input type="text" name="email" class="form-control" placeholder="Masukkan Email Anda">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Password</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                </div>
+                <input type="Password" name="password" class="form-control" placeholder="Masukkkan Password Anda">
+              </div>
+            </div>
+
+            <button type="submit" name="submit" class="btn btn-primary" style="margin-top:10px;">LOGIN</button>
+        </form> 
+         
+      </div>
+    </div>
+    <?php include 'layout/footer.php';?>
+  </body>
+</html>
