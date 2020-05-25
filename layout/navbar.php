@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color:#ffffff;box-shadow:1px 1px 5px grey;height:65px;font-size:15px;font-weight:600;"id="mainNav">
       <div class="container">
       <a class="navbar-brand font-weight-bold text-white" href="index.php">
-        <img src="img/logo.png" width="178" height="100" alt="">
+        <img src="assets/img/logo.png" width="178" height="100" alt="">
       </a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
