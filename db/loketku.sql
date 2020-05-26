@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2020 at 06:02 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.9
+-- Generation Time: May 26, 2020 at 09:32 AM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.6.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -33,7 +31,7 @@ CREATE TABLE `booking` (
   `kapalID` varchar(25) DEFAULT NULL,
   `userID` int(11) NOT NULL,
   `tgl_pemesanan` date DEFAULT NULL,
-  `waktu` enum('12:30','15:00','08:00') DEFAULT NULL,
+  `waktu` enum('08:00','10:30','12:30','14:00','16:30') DEFAULT NULL,
   `rute` enum('gili terawangan','nusa penida') DEFAULT NULL,
   `nama_dermaga` varchar(30) NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
@@ -46,7 +44,7 @@ CREATE TABLE `booking` (
 
 INSERT INTO `booking` (`bookingID`, `kapalID`, `userID`, `tgl_pemesanan`, `waktu`, `rute`, `nama_dermaga`, `jumlah`, `hargaTot`) VALUES
 ('1212', 'A1010', 1001, '2020-04-24', '12:30', 'gili terawangan', 'Sunbay', 3, 90000),
-('1213', 'B1900', 1002, '2020-05-26', '15:00', 'nusa penida', 'Gilibay', 2, 50000),
+('1213', 'B1900', 1002, '2020-05-26', '14:00', 'nusa penida', 'Gilibay', 2, 50000),
 ('1215', 'B1996', 1003, '2020-04-30', '08:00', 'nusa penida', 'Sunbay', 1, 20000);
 
 -- --------------------------------------------------------
@@ -89,7 +87,7 @@ CREATE TABLE `kapal` (
   `kapalID` varchar(25) NOT NULL,
   `jenis` enum('fast boat','Roro','jukung/motor boat') DEFAULT NULL,
   `descrip` varchar(500) DEFAULT NULL,
-  `waktu` enum('08:00','10:30','12:30','14:30','15:00','16:30') DEFAULT NULL,
+  `waktu` enum('08:00','10:30','12:30','14:00','16:30') DEFAULT NULL,
   `harga` int(11) DEFAULT NULL,
   `kapasitas` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -99,13 +97,28 @@ CREATE TABLE `kapal` (
 --
 
 INSERT INTO `kapal` (`kapalID`, `jenis`, `descrip`, `waktu`, `harga`, `kapasitas`) VALUES
-('A1010', 'fast boat', ' ', '12:30', 30000, 12),
-('A1011', 'fast boat', ' ', '14:30', 30000, 12),
-('A1012', 'fast boat', ' ', '14:30', 30000, 12),
-('B1900', 'Roro', ' ', '15:00', 25000, 10),
-('B1901', 'Roro', ' ', '16:30', 25000, 10),
+('A0972', 'fast boat', NULL, '12:30', 30000, 17),
+('A1010', 'fast boat', ' ', '12:30', 30000, 15),
+('A1011', 'fast boat', ' ', '08:00', 30000, 12),
+('A1012', 'fast boat', ' ', '10:30', 30000, 12),
+('A2453', 'fast boat', NULL, '08:00', 30000, 15),
+('A8342', 'fast boat', NULL, '12:30', 25000, 12),
+('A9000', 'fast boat', NULL, '16:30', 20000, 12),
+('A9003', 'fast boat', NULL, '08:00', 25000, 10),
+('AF434', 'fast boat', NULL, '14:00', 25000, 12),
+('B1093', 'jukung/motor boat', NULL, '08:00', 25000, 17),
+('B1900', 'Roro', ' ', '14:00', 35000, 182),
+('B1901', 'fast boat', ' ', '16:30', 25000, 10),
 ('B1996', 'jukung/motor boat', ' ', '08:00', 20000, 15),
-('B1997', 'jukung/motor boat', ' ', '10:30', 20000, 15);
+('B1997', 'jukung/motor boat', ' ', '10:30', 20000, 12),
+('B4375', 'jukung/motor boat', NULL, '12:30', 25000, 15),
+('B4521', 'jukung/motor boat', NULL, '12:30', 20000, 10),
+('B488', 'jukung/motor boat', NULL, '16:30', 25000, 15),
+('B8242', 'fast boat', NULL, '10:30', 30000, 15),
+('BK943', 'jukung/motor boat', NULL, '14:00', 25000, 15),
+('BU485', 'jukung/motor boat', NULL, '14:00', 20000, 12),
+('GH8493', 'jukung/motor boat', NULL, '10:30', 25000, 15),
+('RR934', 'Roro', NULL, '10:30', 35000, 182);
 
 -- --------------------------------------------------------
 
@@ -155,8 +168,7 @@ INSERT INTO `user` (`userID`, `nama`, `email`, `alamat`, `noTelp`, `jenis_kelami
 (1001, 'umbara yanti', 'siumbaraya@gmail.com', 'jalan kaswari,dauh peken,tabanan', '82133445566', 'Perempuan', 'umbb2190', 'user'),
 (1002, 'bagus saning', 'bsgsd@gmail.com', 'jalan anyelir,sawan,klungkung', '89232351310', 'Laki-laki', 'bdgas210j', 'user'),
 (1003, 'cantika kurnia', 'cnakr22@gmail.com', 'jalan mawar,sesetan,denpasar', '89244726122', 'Perempuan', 'cntky328', 'user'),
-(1044, 'admin', 'admin', 'admin', '234', 'Laki-laki', 'admin', 'user'),
-(1046, 'aku', 'aku', 'aku', '1234', 'Laki-laki', 'aku', 'user');
+(1043, 'Ni Made Ani Wahyuni', 'aniwah123@gmail.com', 'Kerambitan, Tabanan', '0892432467', 'Laki-laki', '123', 'user');
 
 --
 -- Indexes for dumped tables
@@ -204,8 +216,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1047;
-
+  MODIFY `userID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1044;
 --
 -- Constraints for dumped tables
 --
@@ -228,7 +239,6 @@ ALTER TABLE `crew`
 --
 ALTER TABLE `tiket`
   ADD CONSTRAINT `tiket_ibfk_1` FOREIGN KEY (`bookingID`) REFERENCES `booking` (`bookingID`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
