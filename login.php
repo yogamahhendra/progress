@@ -69,6 +69,7 @@ if (isset($_POST["submit"])){
             </div>
 
             <button type="submit" name="submit" class="btn btn-primary" style="margin-top:10px;">LOGIN</button>
+          <h6><a href="register.php">Belum punya akun?</a></h6>
         </form> 
          
       </div>
