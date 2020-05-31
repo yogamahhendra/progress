@@ -6,7 +6,8 @@ if (isset($_POST["submit"])){
   $email = $_POST["email"];
   $password = $_POST["password"];
 
-  $cek = mysqli_query($koneksi, "SELECT * FROM user WHERE email = '$email'");
+  $cek = mysqli_query($koneksi, "SELECT nama,email,password,tingkatan_user,alamat,noTelp,jenis_kelamin FROM user LEFT JOIN detailuser USING (userID) WHERE email = '$email'");
+
 
   //cek username
   if (mysqli_num_rows($cek ) === 1){
@@ -14,11 +15,20 @@ if (isset($_POST["submit"])){
     //cek password
     if ($password == $row["password"]) {
 
+      if($row['tingkatan_user'] == 'admin'){
+        $_SESSION['login'] = true;
+        $_SESSION['email']=$row["email"];
+        $_SESSION['nama']=$row ["nama"];
+        $_SESSION['tingkatan_user'] = "admin";
+        header("Location: lamanadmin.php");
+      }elseif($row['tingkatan_user'] == 'user'){
       $_SESSION['login'] = true;
       $_SESSION["email"] = $row["email"];
       $_SESSION["nama"] = $row["nama"];
+      $_SESSION['tingkatan_user'] = "user";
       header("Location: index.php");
     }
+  }
   }
   $error = true;
 }
@@ -68,8 +78,8 @@ if (isset($_POST["submit"])){
               </div>
             </div>
 
-            <button type="submit" name="submit" class="btn btn-primary" style="margin-top:10px;">LOGIN</button>
-          <h6><a href="register.php">Belum punya akun?</a></h6>
+            <button type="submit" name= "submit" class="btn btn-primary" style="margin-top:10px;">LOGIN</button>
+            <h6><a href="register.php">Belum punya akun?</a></h6>
         </form> 
          
       </div>
